@@ -38,7 +38,7 @@ def login():
             user.password, form.password.data
         ):
             login_user(user)
-            return redirect(url_for("users.account"))
+            return redirect(url_for("products.index"))
         else:
             flash("Login failed. Check your username and/or password")
             return redirect(url_for("users.login"))
@@ -56,6 +56,9 @@ def logout():
 @users.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
+    if current_user.username != "admin":
+        return redirect(url_for("products.index"))
+    
     username_form = UpdateUsernameForm()
     if username_form.validate_on_submit():
         current_user.modify(username=username_form.username.data)

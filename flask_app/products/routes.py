@@ -74,7 +74,7 @@ def reservation_detail(product_name, user_name):
         if form.validate_on_submit():
             reservation.modify(status=form.status.data)
             reservation.save()
-            return redirect(url_for("products.reservation_detail", product_name=product_name, user_name=user_name))
+            return redirect(url_for("products.reservation"))
         return render_template("reservation_detail.html",reservation=reservation,user=user,product=product, form=form)
     else:
         return redirect(url_for("products.reservation"))
