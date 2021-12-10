@@ -1,0 +1,113 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h1>Hey, {{ current_user.username }}! You can add products here!</h1>
+    </div>
+</div>
+{% if current_user.username == "admin" %}
+<div class="row">
+    <div class="col">
+        <form action="" method="post" enctype="multipart/form-data">
+            {{ add_product_form.csrf_token }}
+
+            <div class="form-group">
+                {{ add_product_form.name.label(class="form-control-label") }}
+                {{ add_product_form.name(class="form-control form-control-lg") }}
+
+                {% if add_product_form.name.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.name.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ add_product_form.price.label(class="form-control-label") }}
+                {{ add_product_form.price(class="form-control form-control-lg") }}
+
+                {% if add_product_form.price.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.price.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ add_product_form.description.label(class="form-control-label") }}
+                {{ add_product_form.description(class="form-control form-control-lg") }}
+
+                {% if add_product_form.description.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.description.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ add_product_form.ingredients.label(class="form-control-label") }}
+                {{ add_product_form.ingredients(class="form-control form-control-lg") }}
+
+                {% if add_product_form.ingredients.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.ingredients.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ add_product_form.amount.label(class="form-control-label") }}
+                {{ add_product_form.amount(class="form-control form-control-lg") }}
+
+                {% if add_product_form.amount.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.amount.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ add_product_form.limit.label(class="form-control-label") }}
+                {{ add_product_form.limit(class="form-control form-control-lg") }}
+
+                {% if add_product_form.limit.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.limit.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                {{ add_product_form.image.label }}
+                {{ add_product_form.image(class="form-control") }}
+
+                {% if add_product_form.image.errors %}
+                <div class="alert alert-warning" role="alert">
+                    {% for error in add_product_form.image.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ add_product_form.submit }}
+            </div>
+        </form>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}>

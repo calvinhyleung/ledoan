@@ -1,0 +1,33 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="jumbotron" style="margin-top: 20px;">
+    <div class="container">
+      <h2 class="display-5">Reservation is open!</h2>
+      {% if current_user.is_authenticated %}
+      <p class="lead">Welcome Back, {{ current_user.username }}! What would you like to reserve this week?</p>
+      {% else %}
+      <p class="lead">Welcome to LeDoans Bakery!</p>
+      <p class="uk-link-muted">Please <a href="{{url_for('users.login')}}">Login </a>/ <a href="{{url_for('users.register')}}">Register </a> to make reservations.</p>
+      {% endif %}
+    </div>
+</div>
+<div class="card-columns">
+    {% for product in products %}
+    <div class="card" style="width: 21rem; margin-bottom: 20px;">
+        <img class="card-img-top" src="data:image/png;base64,{{product.get_b64_img()}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{product.name}}
+            {% if product.amount != 0 %}
+            <span class="uk-badge">Available</span>
+            {% else %}
+            <span class="uk-badge">Sold Out</span>
+            {% endif %}
+          </h5>
+          <p class="card-text">{{product.description}}</p>
+          <a href="{{ url_for('products.product_detail', product_name=product.name) }}" class="uk-button uk-button-default">Learn More</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

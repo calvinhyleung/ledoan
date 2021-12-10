@@ -1,0 +1,51 @@
+{% extends "header.html" %}
+{% block content %}
+
+{% if error_msg %}
+<b>{{ error_msg }}</b>
+{% endif %}
+
+{% if product %}
+
+<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" style="margin-top: 20px;" uk-grid>
+    <div class="uk-card-media-left uk-cover-container">
+        <img src="data:image/png;base64,{{product.get_b64_img()}}" alt="" uk-cover>
+        <canvas width="600" height="400"></canvas>
+    </div>
+    <div>
+        <div class="uk-card-body">
+            <h3 class="uk-card-title">{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>Ingredients: {{ product.ingredients }}</p>
+            <p>Price: {{ product.price }}</p>
+            {% if product.amount != 0%}
+                <p class="uk-text-warning">Limit {{ product.limit }} per customer</p>
+                {% if current_user.is_authenticated %}
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {{ form.csrf_token }}
+                        <div class="form-group">
+                            {{ form.amount.label(class="form-control-label") }}
+                            {{ form.amount(class="uk-select uk-form-width-xsmall") }}
+                            {% if form.amount.errors %}
+                            <div class="alert alert-warning" role="alert">
+                                {% for error in form.amount.errors %}
+                                <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            {{ form.submit(class="uk-button uk-button-primary") }}
+                        </div>
+                    </form>
+                {% else %}
+                    <p class="uk-link-muted">Please <a href="{{url_for('users.login')}}">Login </a>/ <a href="{{url_for('users.register')}}">Register </a> to make reservations.</p>
+                {% endif %}
+            {% else %}
+                <button class="uk-button uk-button-danger">Sold Out</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+{% endblock content %}

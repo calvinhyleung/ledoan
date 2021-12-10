@@ -1,0 +1,11 @@
+{% extends "header.html" %}
+{% block content %}
+<dl class="uk-description-list">
+    <dt>Group Members:</dt>
+    <dd>Calvin Leung</dd>
+    <dt>Project Description</dt>
+    <dd>The web application is a purchasing platform for an asian bakery business that streamlines the reservation requests process. The homepage of the website showcases the products that the bakery offers and each product has their own respective page that include details about the product. In order to make a reservation, the users have to make an account. After registering for an account, the user can make reservations for products. Each product has a limit per customer, and customers can modify the amount reserved as long as it hasn’t been confirmed with the admin yet. All of the user's reservations can be viewed in the reservation tab. On the admin side of this application, the user with the “admin” username has access to all of the reservations, which is why the admin account should be the first account to be created when the web application is initialized. The admin can view all the reservations made in the reservations tab. 
+        The admin can go into each reservation and edit the status of the reservation by clicking the respective row of the reservation. A graph of reservations is also shown at the bottom of the page. The admin can also add products to the website with the “Add Products” page. Provided the required information, the product will be added to the database and users will be able to see it and make reservations for it. 
+        </dd>
+</dl>
+{% endblock content %}

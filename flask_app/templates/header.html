@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block header %}
+<header>
+    <!-- Main Navbar -->
+    <nav class="uk-container uk-navbar">
+        
+        <a class="uk-navbar-item uk-logo" href="{{ url_for('products.index') }}"><img src="{{url_for('static', filename='logo.png')}}" class="logo-image"></a>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav uk-visible@s">
+                <li class="uk-text-large"><a href="{{ url_for('products.about') }}">About</a></li>
+                <li class="uk-text-large"><a href="https://www.instagram.com/ledoansbakery/" target="_blank">Instagram</a></li>
+                {% if current_user.is_authenticated %}
+                <li class="uk-text-large"><a href="{{ url_for('products.reservation') }}">Reservation</a></li>
+                {% if current_user.username == "admin" %}
+                <li class="uk-text-large"><a href="{{ url_for('users.account') }}">Add Product</a></li>
+                {% endif %}
+                <li class="uk-text-large"><a href="{{ url_for('users.logout') }}">Logout</a></li>
+                {% else %}
+                <li class="uk-text-large"><a href="{{ url_for('users.register') }}">Register</a></li>
+                <li class="uk-text-large"><a href="{{ url_for('users.login') }}">Login</a></li>
+                {% endif %}
+            </ul>
+            <a href="#" class="uk-navbar-toggle uk-hidden@s" uk-navbar-toggle-icon uk-toggle="target: #sidenav"></a>
+        </div>
+    </nav>
+</header>
+
+<div id="sidenav" uk-offcanvas="flip: true" class="uk-offcanvas">
+    <div class="uk-offcanvas-bar">
+        <ul class="uk-nav">
+            <li class="uk-text-large"><a href="{{ url_for('products.about') }}">About</a></li>
+            <li class="uk-text-large"><a href="https://www.instagram.com/ledoansbakery/" target="_blank">Instagram</a></li>
+            {% if current_user.is_authenticated %}
+            <li class="uk-text-large"><a href="{{ url_for('products.reservation') }}">Reservation</a></li>
+            {% if current_user.username == "admin" %}
+            <li class="uk-text-large"><a href="{{ url_for('users.account') }}">Add Product</a></li>
+            {% endif %}
+            <li class="uk-text-large"><a href="{{ url_for('users.logout') }}">Logout</a></li>
+            {% else %}
+            <li class="uk-text-large"><a href="{{ url_for('users.register') }}">Register</a></li>
+            <li class="uk-text-large"><a href="{{ url_for('users.login') }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+{% endblock %}
