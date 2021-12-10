@@ -67,18 +67,13 @@ def account():
         img = add_product_form.image.data
         filename = secure_filename(img.filename)
         content_type = f'images/{filename[-3:]}'
-        # item = Item(name=add_product_form.name.data, 
-        #             price=add_product_form.price.data, 
-        #             description=add_product_form.description.data,
-        #             ingredients=add_product_form.ingredients.data,
-        #             amount=add_product_form.amount.data,
-        #             )
         product = Product()
         product.name = add_product_form.name.data
         product.price = add_product_form.price.data
         product.description = add_product_form.description.data
         product.ingredients = add_product_form.ingredients.data
         product.amount = add_product_form.amount.data
+        product.limit = add_product_form.limit.data
         product.image.put(img.stream, content_type=content_type)
         product.save()
         return redirect(url_for('products.index'))
